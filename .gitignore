@@ -1,0 +1,10 @@
+# Ignorar carpetas de compilación de Maven/Gradle
+**/target/
+**/build/
+
+# Ignorar configuraciones de IntelliJ
+.idea/
+*.iml
+
+# Archivos de sistema
+.DS_Store
