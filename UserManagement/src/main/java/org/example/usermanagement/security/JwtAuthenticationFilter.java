@@ -1,10 +1,10 @@
-package org.example.usermanagement.config;
+package org.example.usermanagement.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import lombok.NonNull;
+import org.jspecify.annotations.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.example.usermanagement.service.JwtService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
