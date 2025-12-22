@@ -1,0 +1,56 @@
+services:
+
+  # Spring Boot Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: usermanagement_app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      # Connection to the internal Docker DB (note the host 'postgres-db' instead of localhost)
+      - DB_URL=jdbc:postgresql://postgres-db:5432/panel_admin_db
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
+      # System variables
+      - JWT_SECRET=5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+      - JWT_EXPIRATION=3600000
+      - JWT_REFRESH_EXPIRATION=604800000
+      - SPRING_THREADS_VIRTUAL_ENABLED=true
+      - JAVA_OPTS=-Xmx512m -Xms256m
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # Database Service (Postgres)
+  postgres-db:
+    image: postgres:16-alpine
+    container_name: usermanagement_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=panel_admin_db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
