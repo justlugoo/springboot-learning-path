@@ -9,12 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserManagementApplication {
 
-    void main() { SpringApplication.run(UserManagementApplication.class);
+    static void main(String[] args) { SpringApplication.run(UserManagementApplication.class, args);
     }
 
     @GetMapping("/")
     public String hello(){
-        return "Hello word";
+        return "Hello World";
+    }
+
+    @GetMapping("/verificar")
+    public String verificarHilo() {
+        return Thread.currentThread().toString();
     }
 
 }
