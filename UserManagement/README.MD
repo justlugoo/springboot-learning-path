@@ -98,6 +98,24 @@ mvn spring-boot:run
 
 Aplicación disponible en `http://localhost:8080`
 
+## Docker
+
+### Desarrollo Local
+```bash
+# Solo PostgreSQL
+docker-compose up postgres
+
+# Aplicación + Base de datos
+docker-compose up --build
+```
+
+### Acceso
+- Aplicación: http://localhost:8080
+- PostgreSQL: localhost:5432
+
+### Variables de Entorno
+Ver `docker-compose.yml` para configuración completa.
+
 ## Ejemplo de Uso
 
 Registro:
