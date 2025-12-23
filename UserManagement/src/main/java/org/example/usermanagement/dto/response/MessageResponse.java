@@ -1,4 +1,6 @@
 package org.example.usermanagement.dto.response;
 
-public record MessageResponse() {
+public record MessageResponse(
+        String message
+) {
 }

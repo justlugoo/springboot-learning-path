@@ -1,4 +1,12 @@
 package org.example.usermanagement.dto.response;
 
-public record UserResponse() {
+import java.util.UUID;
+
+public record UserResponse(
+        UUID id,
+        String username,
+        String email,
+        String role,
+        boolean isActive
+) {
 }
